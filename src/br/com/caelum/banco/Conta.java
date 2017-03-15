@@ -7,8 +7,9 @@ import br.com.caelum.util.DataTime;
  *
  * @author PeterThomas
  */
-public class Conta {
-
+abstract class Conta {
+	
+	protected Banco banco;
     protected String agencia;
     protected int numero;
     protected double saldo;
@@ -22,6 +23,14 @@ public class Conta {
 
     public void setNumero(int numero) { this.numero = numero; }
 
+    public String getDataAbertura() {
+    	return dataAbertura;
+    }
+    
+    public void setDataAbertura(String dataAbertura) {
+    	this.dataAbertura = dataAbertura;
+    }    
+    
     public double getSaldo() {
         return this.saldo + this.limite;
     }
@@ -42,12 +51,22 @@ public class Conta {
         return Conta.totalDeContas;
     }
 
-    
-    /*
-     * @param Cliente titular, double saldo, double limite
-     * 
-     * */ 
-    
+    public Banco getBanco() {
+		return banco;
+	}
+
+	public void setBanco(Banco banco) {
+		this.banco = banco;
+	}
+	
+    public String getAgencia() {
+		return agencia;
+	}
+
+	public void setAgencia(String agencia) {
+		this.agencia = agencia;
+	}
+   
     public Conta() {};
     
     public Conta(Cliente titular, double saldo) {
@@ -97,7 +116,5 @@ public class Conta {
     	
     }
     
-    public void atualiza(double taxa) {
-    	this.saldo += this.saldo + taxa;
-    }
+    public abstract void atualiza(double taxa);
 }

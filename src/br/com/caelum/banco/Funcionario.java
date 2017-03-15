@@ -3,9 +3,10 @@ package br.com.caelum.banco;
 import br.com.caelum.util.ValidaCpfCnpj;
 
 abstract class Funcionario {
-			
+
 	protected String nome;
 	protected String cpf;
+	protected String departamento;
 	protected double salario;
 
 	public String getNome() {
@@ -23,6 +24,14 @@ abstract class Funcionario {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
+	public String getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
 
 	public double getSalario() {
 		return salario;
@@ -31,7 +40,7 @@ abstract class Funcionario {
 	public void setSalario(double salario) {
 		this.salario = salario;
 	}
-	
+
 	public Funcionario() {
 		super();
 	}
@@ -42,21 +51,21 @@ abstract class Funcionario {
 		this.cpf = cpf;
 		this.salario = salrio;
 	}
-	
-	public void mudaCPF(String cpf) {
-        validaCPF(cpf);
-        this.cpf = cpf;
-    }
 
-    private void validaCPF(String cpf) {
-        if (ValidaCpfCnpj.isValidCPF(cpf)) {
-            System.out.println("Cpf informado e valido.");
-        } else {
-            System.out.println("Cpf informado e invalido.");
-        }
-    }
-    
-    abstract double getBonificacao();
+	public void mudaCPF(String cpf) {
+		validaCPF(cpf);
+		this.cpf = cpf;
+	}
+
+	private void validaCPF(String cpf) {
+		if (ValidaCpfCnpj.isValidCPF(cpf)) {
+			System.out.println("Cpf informado e valido.");
+		} else {
+			System.out.println("Cpf informado e invalido.");
+		}
+	}
+
+	abstract double getBonificacao();
 
 	public void mostra() {
 		System.out.println("Nome: " + this.nome);

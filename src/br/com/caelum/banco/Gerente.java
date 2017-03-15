@@ -5,10 +5,10 @@ package br.com.caelum.banco;
  * 
  * */
 
-public class Gerente extends Funcionario {
+public class Gerente extends Funcionario implements Autenticavel {
 
-	int senha;
-	int numeroDeFuncionariosGerenciados;
+	private int senha;
+	private int numeroDeFuncionariosGerenciados;
 
 	public int getSenha() {
 		return senha;
@@ -25,27 +25,30 @@ public class Gerente extends Funcionario {
 	public void setNumeroDeFuncionariosGerenciados(int numeroDeFuncionariosGerenciados) {
 		this.numeroDeFuncionariosGerenciados = numeroDeFuncionariosGerenciados;
 	}
-	
-	public Gerente () {
+
+	public Gerente() {
 		super();
 	}
 
 	public Gerente(String nome, String cpf, double salario, int senha) {
-		
+		this.nome = nome;
+		this.cpf = cpf;
+		this.salario = salario;
+		this.senha = senha;
 	}
-	
+
 	public boolean autentica(int senha) {
-		if (this.senha == senha) {
-			System.out.println("Acesso Permitido!");
-			return true;
-		} else {
+		if (this.senha != senha) {
 			System.out.println("Acesso Negado!");
 			return false;
 		}
+		
+		System.out.println("Acesso Permitido!");
+		return true;
 	}
-	
+
 	@Override
-	public double getBonificacao () {
-		return this.salario * 1.4 + 1000; 
+	public double getBonificacao() {
+		return this.salario * 1.4 + 1000;
 	}
 }

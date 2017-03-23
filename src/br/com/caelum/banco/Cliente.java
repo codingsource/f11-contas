@@ -68,6 +68,7 @@ public class Cliente {
 
 	public void mostra() {
 		System.out.println("Nome: " + this.nome + this.sobrenome);
-		System.out.println("Cpf: " + this.cpf);
+		System.out.println("Cpf: " + this.cpf + "\n");
+		
 	}
 }

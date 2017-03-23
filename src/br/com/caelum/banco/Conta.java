@@ -127,7 +127,7 @@ public abstract class Conta {
 
 	@Override
 	public String toString() {
-		return "[titular=" + this.getTitular() + ", numero=" + this.getNumero() + ", agencia=" + this.getAgencia()
+		return "[titular=" + this.getTitular().toUpperCase() + ", numero=" + this.getNumero() + ", agencia=" + this.getAgencia()
 				+ " ]";
 	}
 	
@@ -136,15 +136,12 @@ public abstract class Conta {
 		if (object == null) {
 			return false;
 		}
+
 		// Casting de referências
 		Conta outraConta = (Conta) object;
-		if (this.numero == outraConta.numero && this.agencia.equals(outraConta.agencia)) {
-			return true;
-		}
-		return false;
+		
+		return this.numero == outraConta.numero && this.agencia.equals(outraConta.agencia); 
 	}
 
-	public void atualiza(double taxa) {
-
-	}
+	public abstract void atualiza(double taxa);
 }

@@ -7,7 +7,7 @@ import br.com.caelum.util.DataTime;
  *
  * @author PeterThomas
  */
-public class Conta {
+public abstract class Conta {
 
 	protected Banco banco;
 	protected String agencia;
@@ -37,7 +37,7 @@ public class Conta {
 	}
 
 	public double getSaldo() {
-		return this.saldo + this.limite;
+		return this.saldo;
 	}
 
 	public void setLimite(double limite) {
@@ -59,15 +59,12 @@ public class Conta {
 	public String getAgencia() {
 		return agencia;
 	}
-	
-    public String getTipo() {
-    	return this.tipo;
-    }
+
+	public abstract String getTipo();
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
 
 	public void setAgencia(String agencia) {
 		this.agencia = agencia;
@@ -90,28 +87,32 @@ public class Conta {
 		this.numero = Conta.totalDeContas();
 	}
 
-	void saque(double quantidade) {
-		if (this.saldo < quantidade || quantidade > this.saldo + this.limite) {
-				throw new IllegalArgumentException("Saldo insuficiente");
-		} else {
-			this.saldo -= quantidade;
+	public void saque(double quantidade) {
+		if (quantidade < 0) {
+			throw new IllegalArgumentException("Você tentou sacar" + " um valor negativo");
 		}
+		if (this.saldo < quantidade || quantidade > this.saldo + this.limite) {
+			throw new SaldoInsuficienteException(quantidade);
+		}
+		this.saldo -= (quantidade + 0.10);
 	}
 
 	public void deposita(double quantidade) {
-		if (quantidade % 2 == 0) {
+		if (quantidade < 0) {
+			throw new IllegalArgumentException("Você tentou depositar" + " um valor negativo");
+		} else {
 			this.saldo += quantidade;
 		}
 	}
 
-	// boolean tranferePara(Conta destino, double valor) {
-	// if (!this.saque(valor)) {
-	// return false;
-	// } else {
-	// destino.deposita(valor);
-	// return true;
-	// }
-	// }
+	boolean tranferePara(Conta destino, double valor) {
+		if (valor > 0) {
+			return false;
+		} else {
+			destino.deposita(valor);
+			return true;
+		}
+	}
 
 	public void getConta() {
 		System.out.println("Data de abertura: " + this.dataAbertura);
@@ -122,6 +123,25 @@ public class Conta {
 		System.out.println("Saldo: " + this.saldo);
 		this.titular.mostra();
 
+	}
+
+	@Override
+	public String toString() {
+		return "[titular=" + this.getTitular() + ", numero=" + this.getNumero() + ", agencia=" + this.getAgencia()
+				+ " ]";
+	}
+	
+	@Override
+	public boolean equals(Object object){ 
+		if (object == null) {
+			return false;
+		}
+		// Casting de referências
+		Conta outraConta = (Conta) object;
+		if (this.numero == outraConta.numero && this.agencia.equals(outraConta.agencia)) {
+			return true;
+		}
+		return false;
 	}
 
 	public void atualiza(double taxa) {

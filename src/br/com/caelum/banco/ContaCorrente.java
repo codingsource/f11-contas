@@ -4,7 +4,13 @@ public class ContaCorrente extends Conta {
 
 	@Override
 	public void saque(double quantidade) {
-		super.saque(quantidade);
+		if (quantidade < 0) {
+			throw new IllegalArgumentException("Você tentou sacar" + " um valor negativo");
+		}
+		if (this.saldo < quantidade || quantidade > this.saldo + this.limite) {
+			throw new SaldoInsuficienteException(quantidade);
+		}
+		this.saldo -= (quantidade + 0.10);
 	}
 
 	@Override
@@ -21,7 +27,7 @@ public class ContaCorrente extends Conta {
 	public String getTipo() {
 		return this.getTipo();
 	}
-	
+
 	public double getValorImposto() {
 		return this.getSaldo() * 0.01;
 	}

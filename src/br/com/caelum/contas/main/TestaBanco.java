@@ -1,4 +1,8 @@
-package br.com.caelum.banco;
+package br.com.caelum.contas.main;
+
+import br.com.caelum.banco.Banco;
+import br.com.caelum.banco.Cliente;
+import br.com.caelum.banco.ContaCorrente;
 
 public class TestaBanco {
 	public static void main(String[] args) {

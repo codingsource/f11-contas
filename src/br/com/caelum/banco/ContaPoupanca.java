@@ -14,7 +14,7 @@ public class ContaPoupanca extends Conta{
 
 	@Override
 	public String getTipo() {
-		return this.getTipo();
+		return this.tipo;
 	}
 
 }

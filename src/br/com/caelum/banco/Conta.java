@@ -7,7 +7,7 @@ import br.com.caelum.util.DataTime;
  *
  * @author PeterThomas
  */
-public abstract class Conta {
+public class Conta implements Comparable<Conta> {
 
 	protected Banco banco;
 	protected String agencia;
@@ -60,7 +60,9 @@ public abstract class Conta {
 		return agencia;
 	}
 
-	public abstract String getTipo();
+	public String getTipo() {
+		return this.tipo;
+	}
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
@@ -75,7 +77,7 @@ public abstract class Conta {
 
 	public Conta(Cliente titular, double saldo, String tipo) {
 		super();
-		// this.banco.setNome("Banco do Brasil");
+
 		DataTime d = new DataTime();
 		this.dataAbertura = d.dataAtual_();
 		this.agencia = "2883";
@@ -83,13 +85,14 @@ public abstract class Conta {
 		this.saldo = saldo;
 		this.limite = 1000.0;
 		this.tipo = tipo;
+
 		Conta.totalDeContas = Conta.totalDeContas + 1;
 		this.numero = Conta.totalDeContas();
 	}
 
 	public void saque(double quantidade) {
 		if (quantidade < 0) {
-			throw new IllegalArgumentException("Você tentou sacar" + " um valor negativo");
+			throw new IllegalArgumentException("Voc? tentou sacar" + " um valor negativo");
 		}
 		if (this.saldo < quantidade || quantidade > this.saldo + this.limite) {
 			throw new SaldoInsuficienteException(quantidade);
@@ -99,7 +102,7 @@ public abstract class Conta {
 
 	public void deposita(double quantidade) {
 		if (quantidade < 0) {
-			throw new IllegalArgumentException("Você tentou depositar" + " um valor negativo");
+			throw new IllegalArgumentException("Voc? tentou depositar" + " um valor negativo");
 		} else {
 			this.saldo += quantidade;
 		}
@@ -116,8 +119,8 @@ public abstract class Conta {
 
 	public void getConta() {
 		System.out.println("Data de abertura: " + this.dataAbertura);
-		System.out.println("Agência: " + this.agencia);
-		System.out.println("Número: " + this.numero);
+		System.out.println("Ag?ncia: " + this.agencia);
+		System.out.println("N?mero: " + this.numero);
 		System.out.println("Tipo: " + this.tipo);
 		System.out.println("Limite: " + this.limite);
 		System.out.println("Saldo: " + this.saldo);
@@ -127,21 +130,29 @@ public abstract class Conta {
 
 	@Override
 	public String toString() {
-		return "[titular=" + this.getTitular().toUpperCase() + ", numero=" + this.getNumero() + ", agencia=" + this.getAgencia()
-				+ " ]";
+		return "{ \n Titular = " + this.getTitular().toUpperCase() + "\n Numero = " + this.getNumero() + "\n Agencia = "
+				+ this.getAgencia() + "\n Data de abertura = " + this.getDataAbertura() + "\n Tipo = " + this.getTipo()
+				+ "\n Saldo = " + this.getSaldo() + "}";
 	}
-	
+
 	@Override
-	public boolean equals(Object object){ 
+	public boolean equals(Object object) {
 		if (object == null) {
 			return false;
 		}
 
-		// Casting de referências
+		// Casting de refer?ncias
 		Conta outraConta = (Conta) object;
-		
-		return this.numero == outraConta.numero && this.agencia.equals(outraConta.agencia); 
+
+		return this.numero == outraConta.numero && this.agencia.equals(outraConta.agencia);
 	}
 
-	public abstract void atualiza(double taxa);
+	public void atualiza(double taxa) {
+
+	}
+
+	@Override
+	public int compareTo(Conta arg0) {
+		return this.titular.getNome().compareTo(arg0.titular.getNome());
+	}
 }

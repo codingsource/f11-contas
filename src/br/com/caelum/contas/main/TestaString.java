@@ -1,4 +1,4 @@
-package br.com.caelum.banco;
+package br.com.caelum.contas.main;
 
 public class TestaString {
 

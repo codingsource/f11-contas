@@ -1,6 +1,5 @@
 package br.com.caelum.contas.main;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,9 +41,6 @@ public class TestaConta {
         	contas.add(cpi);
 		}
     	
-    	
-//    	System.out.println(contas);
-    	
     	mc.ordenaLista(contas);	
     	
     	for (Conta conta : contas) {
@@ -53,7 +49,7 @@ public class TestaConta {
     	
     	System.out.println("\n");
     	
-//    	ManipulandorDeSeguroDeVida seguroDeVida = new ManipulandorDeSeguroDeVida(1, cliente.getNome(), 100.0);
-//    	seguroDeVida.getSeguro();
+    	ManipulandorDeSeguroDeVida seguroDeVida = new ManipulandorDeSeguroDeVida(1, cliente.getNome(), 100.0);
+    	seguroDeVida.getSeguro();
     }
 }

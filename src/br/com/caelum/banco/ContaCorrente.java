@@ -20,7 +20,8 @@ public class ContaCorrente extends Conta {
 
 	@Override
 	public void deposita(double quantidade) {
-		this.saldo += quantidade - 0.10;
+//		this.saldo += quantidade - 0.10;
+		this.saldo += quantidade;
 	}
 
 	@Override

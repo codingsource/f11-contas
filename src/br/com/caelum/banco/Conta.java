@@ -76,8 +76,6 @@ public class Conta implements Comparable<Conta> {
 	};
 
 	public Conta(Cliente titular, double saldo, String tipo) {
-		super();
-
 		DataTime d = new DataTime();
 		this.dataAbertura = d.dataAtual_();
 		this.agencia = "2883";
@@ -119,7 +117,7 @@ public class Conta implements Comparable<Conta> {
 
 	public void getConta() {
 		System.out.println("Data de abertura: " + this.dataAbertura);
-		System.out.println("Ag?ncia: " + this.agencia);
+		System.out.println("Agencia: " + this.agencia);
 		System.out.println("N?mero: " + this.numero);
 		System.out.println("Tipo: " + this.tipo);
 		System.out.println("Limite: " + this.limite);
@@ -135,18 +133,6 @@ public class Conta implements Comparable<Conta> {
 				+ "\n Saldo = " + this.getSaldo() + "}";
 	}
 
-	@Override
-	public boolean equals(Object object) {
-		if (object == null) {
-			return false;
-		}
-
-		// Casting de refer?ncias
-		Conta outraConta = (Conta) object;
-
-		return this.numero == outraConta.numero && this.agencia.equals(outraConta.agencia);
-	}
-
 	public void atualiza(double taxa) {
 
 	}
@@ -154,5 +140,33 @@ public class Conta implements Comparable<Conta> {
 	@Override
 	public int compareTo(Conta arg0) {
 		return this.titular.getNome().compareTo(arg0.titular.getNome());
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((agencia == null) ? 0 : agencia.hashCode());
+		result = prime * result + numero;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Conta other = (Conta) obj;
+		if (agencia == null) {
+			if (other.agencia != null)
+				return false;
+		} else if (!agencia.equals(other.agencia))
+			return false;
+		if (numero != other.numero)
+			return false;
+		return true;
 	}
 }

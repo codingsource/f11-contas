@@ -1,8 +1,10 @@
 package br.com.caelum.util;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * DataTime
@@ -15,6 +17,35 @@ public class DataTime {
 	Calendar c = Calendar.getInstance();
 	Date data = c.getTime();
 	static DateFormat f;
+
+	static SimpleDateFormat dateFormat;
+	
+	 
+
+	public String simpleDate() {
+		dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ROOT);
+		return dateFormat.format(data);
+	}
+	
+	public String simpleDateTime() {
+		dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.ROOT);
+		return dateFormat.format(data);
+	}
+	
+	public String simpleTime() {
+		dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.ROOT);
+		return dateFormat.format(data);
+	}
+	
+	public String simpleTimeZ() {
+		dateFormat = new SimpleDateFormat("hh:mm:ss zzzz", Locale.ROOT);
+		return dateFormat.format(data);
+	}
+	
+	public String simpleTimeE() {
+		dateFormat = new SimpleDateFormat("MMMM, dd MM yyyy HH:mm:ss a", Locale.ROOT);
+		return dateFormat.format(data);
+	}
 
 	public String dataAtualCompleta() {
 		/* String = Domingo, 12 de Março de 2017 */

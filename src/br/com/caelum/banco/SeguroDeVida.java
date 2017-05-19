@@ -38,12 +38,6 @@ public class SeguroDeVida implements Tributavel {
 	}
 
 	public double getValorImposto() {
-		return 42 + this.valor * 0.02;
+		return 42;
 	}
-
-	@Override
-	public String getTipo() {
-		return null;
-	}
-
 }

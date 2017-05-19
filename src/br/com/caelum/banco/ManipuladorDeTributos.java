@@ -8,8 +8,8 @@ public class ManipuladorDeTributos {
 		total = 0;
 		int tamanho = 1;
 		for (int i = 0; i < tamanho; i++) {
-//			Tributavel t = i;
-//			total += t;
+//			Tributavel t =
+//			total += t.;
 		}
 	}
 	

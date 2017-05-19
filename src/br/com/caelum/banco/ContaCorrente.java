@@ -1,6 +1,6 @@
 package br.com.caelum.banco;
 
-public class ContaCorrente extends Conta {
+public class ContaCorrente extends Conta implements Tributavel{
 
 	@Override
 	public void saque(double quantidade) {
@@ -15,13 +15,16 @@ public class ContaCorrente extends Conta {
 
 	@Override
 	public void atualiza(double taxa) {
-		this.saldo += this.saldo * taxa * 2;
+		synchronized (this) {
+			this.saldo += this.saldo * taxa * 2;
+		}
 	}
 
 	@Override
 	public void deposita(double quantidade) {
-//		this.saldo += quantidade - 0.10;
-		this.saldo += quantidade;
+		synchronized (this) {
+			this.saldo += quantidade;
+		}
 	}
 
 	@Override
@@ -29,6 +32,7 @@ public class ContaCorrente extends Conta {
 		return this.tipo;
 	}
 
+	@Override
 	public double getValorImposto() {
 		return this.getSaldo() * 0.01;
 	}

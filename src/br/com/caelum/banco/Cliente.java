@@ -2,9 +2,7 @@ package br.com.caelum.banco;
 
 import br.com.caelum.util.ValidaCpfCnpj;
 
-/**
- * Cliente
- * 
+/** 
  * @author Peter
  */
 public class Cliente {

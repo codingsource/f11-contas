@@ -99,10 +99,12 @@ public class Conta implements Comparable<Conta> {
 	}
 
 	public void deposita(double quantidade) {
-		if (quantidade < 0) {
-			throw new IllegalArgumentException("Voc? tentou depositar" + " um valor negativo");
-		} else {
-			this.saldo += quantidade;
+		synchronized (this) {
+			if (quantidade < 0) {
+				throw new IllegalArgumentException("Voc? tentou depositar" + " um valor negativo");
+			} else {
+				this.saldo += quantidade;
+			}
 		}
 	}
 
@@ -134,6 +136,10 @@ public class Conta implements Comparable<Conta> {
 	}
 
 	public void atualiza(double taxa) {
+		synchronized (this) {
+			double saldoAtualizado = this.saldo * (1 + taxa);
+			this.saldo =  saldoAtualizado;
+		}
 
 	}
 
